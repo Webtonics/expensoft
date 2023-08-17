@@ -25,7 +25,7 @@ class ExpenseCard extends StatelessWidget {
         ),
         title: Text(exp.title),
         subtitle: Text(DateFormat('MMMM dd, yyyy').format(exp.date)),
-        trailing: Text(NumberFormat.currency(locale: 'en_IN', symbol: '₹')
+        trailing: Text(NumberFormat.currency(locale: 'en_IN', symbol: '₦')
             .format(exp.amount)),
       ),
     );

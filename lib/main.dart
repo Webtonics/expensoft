@@ -5,8 +5,12 @@ import './models/database_provider.dart';
 import './screens/category_screen.dart';
 import './screens/expense_screen.dart';
 import './screens/all_expenses.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
   runApp(ChangeNotifierProvider(
     create: (_) => DatabaseProvider(),
     child: const MyApp(),
@@ -26,6 +30,9 @@ class MyApp extends StatelessWidget {
         ExpenseScreen.name: (_) => const ExpenseScreen(),
         AllExpenses.name: (_) => const AllExpenses(),
       },
+      theme: ThemeData.dark(),
+
+      // theme: ThemeData.light(),
     );
   }
 }
