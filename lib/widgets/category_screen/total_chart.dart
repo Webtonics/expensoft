@@ -12,6 +12,16 @@ class TotalChart extends StatefulWidget {
 }
 
 class _TotalChartState extends State<TotalChart> {
+  //function to get width of the screem
+  double screenSize() {
+    var width = MediaQuery.of(context).size.width;
+    if (width >= 400) {
+      return 50.0;
+    } else {
+      return 20.0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<DatabaseProvider>(builder: (_, db, __) {
@@ -66,12 +76,14 @@ class _TotalChartState extends State<TotalChart> {
             flex: 40,
             child: PieChart(
               PieChartData(
-                centerSpaceRadius: 20.0,
+                centerSpaceRadius: screenSize(),
                 sections: total != 0
                     ? list
                         .map(
                           (e) => PieChartSectionData(
                             showTitle: false,
+                            // titlePositionPercentageOffset: 2.0,
+                            // badgePositionPercentageOffset: 2,
                             value: e.totalAmount,
                             color: Colors.primaries[list.indexOf(e)],
                           ),

@@ -1,3 +1,4 @@
+import 'package:expense_app/utils/utils/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './models/database_provider.dart';
@@ -21,18 +22,30 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: CategoryScreen.name,
-      routes: {
-        CategoryScreen.name: (_) => const CategoryScreen(),
-        ExpenseScreen.name: (_) => const ExpenseScreen(),
-        AllExpenses.name: (_) => const AllExpenses(),
-      },
-      theme: ThemeData.dark(),
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      builder: (context, _) {
+        final themeProvider = Provider.of<ThemeProvider>(context, listen: true);
 
-      // theme: ThemeData.light(),
-    );
-  }
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          initialRoute: CategoryScreen.name,
+          routes: {
+            CategoryScreen.name: (_) => const CategoryScreen(),
+            ExpenseScreen.name: (_) => const ExpenseScreen(),
+            AllExpenses.name: (_) => const AllExpenses(),
+          },
+          // themeMode: ThemeMode.system,
+          themeMode: themeProvider.themeMode,
+          theme: ThemeData(
+            primaryColor: Colors.deepPurple,
+            appBarTheme: const AppBarTheme(backgroundColor: Colors.deepPurple),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
+            ),
+          ),
+          darkTheme: ThemeData.dark(),
+        );
+      });
 }

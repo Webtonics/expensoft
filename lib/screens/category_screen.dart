@@ -1,3 +1,4 @@
+import 'package:expense_app/widgets/change_theme_button.dart';
 import 'package:flutter/material.dart';
 import '../widgets/category_screen/category_fetcher.dart';
 import '../widgets/expense_form.dart';
@@ -10,6 +11,9 @@ class CategoryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Categories'),
+        actions: const [
+          ChangeThemeButton(),
+        ],
       ),
       body: const CategoryFetcher(),
       floatingActionButton: FloatingActionButton(
